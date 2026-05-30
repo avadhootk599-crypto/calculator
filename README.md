@@ -1,44 +1,87 @@
 # 🧮 Calculator
 
-A clean, functional browser-based calculator built with vanilla HTML, CSS, and JavaScript.
+A simple, clean calculator web app built with vanilla HTML, CSS, and JavaScript.
 
-## Features
+---
 
-- Basic arithmetic: addition, subtraction, multiplication, division
-- Decimal point support
-- Backspace to delete the last digit
-- AC (All Clear) to reset
-- Chained operations — perform multiple calculations without pressing `=` each time
-- Division-by-zero handling (returns `"undefined"`)
-
-## Project Structure
+## 📁 Project Structure
 
 ```
-├── index.html   # Markup and button layout
-├── style.css    # Styling and grid layout
-└── script.js    # Calculator logic and event listeners
+calculator/
+├── index.html    # Markup and button layout
+├── style.css     # Styling and layout
+└── script.js     # All calculator logic
 ```
 
-## How to Use
+---
 
-Just open `index.html` in any modern browser — no build step or dependencies required.
+## ✨ Features
+
+- Basic arithmetic — addition, subtraction, multiplication, division
+- **Chained operations** — e.g. `3 + 4 - 2 =` computes left to right
+- Decimal support
+- Backspace to delete last digit
+- AC to fully reset
+- Division by zero shows `Error`
+- **Full keyboard support**
+
+---
+
+## ⌨️ Keyboard Shortcuts
+
+| Key | Action |
+|-----|--------|
+| `0` – `9` | Enter digits |
+| `+` `-` `*` `/` | Operators |
+| `Enter` or `=` | Calculate result |
+| `Backspace` | Delete last digit |
+| `Escape` | Clear (AC) |
+| `.` | Decimal point |
+
+---
+
+## 🚀 How to Run
+
+No setup or dependencies needed. Just open `index.html` in any browser:
 
 ```bash
-open index.html
+# Option 1 — double-click index.html in your file explorer
+
+# Option 2 — use VS Code Live Server extension
+# Right-click index.html → "Open with Live Server"
+
+# Option 3 — use Python's built-in server
+python -m http.server
+# then open http://localhost:8000
 ```
 
-## How It Works
+---
 
-- **Display** — shows the current input or result; starts at `0`
-- **Numbers (0–9)** — append digits to the display; replaces `0` if it's the only character
-- **Operators (+, −, ×, ÷)** — store the current number and operator; supports chaining (calculates the running result before setting a new operator)
-- **Equals (=)** — computes the final result using the stored operator and both operands
-- **Decimal (.)** — appends a decimal point; prevents duplicates
-- **Backspace (<=)** — removes the last character, falling back to `0` when the display is a single digit
-- **AC** — resets everything to the initial state
+## 🧠 How the Logic Works
 
-## Known Limitations
+The calculator uses four state variables:
 
-- No keyboard input support
-- Display does not truncate very long numbers (can overflow visually)
-- No percentage or sign-toggle button
+| Variable | Purpose |
+|----------|---------|
+| `firstNumber` | Number entered before the operator |
+| `secondNumber` | Number entered after the operator |
+| `operator` | The chosen operation (`+`, `-`, `*`, `/`) |
+| `shouldResetDisplay` | Flag to clear display on next digit press |
+
+**Chaining** works by computing the pending operation immediately when a second operator is pressed, then carrying the result forward as the new `firstNumber`.
+
+---
+
+## 🐛 Known Limitations
+
+- No keyboard support for `%` or `±`
+- Display doesn't scroll for very long numbers
+- No calculation history
+
+---
+
+## 🛠️ Built With
+
+- HTML5
+- CSS3 (Grid layout)
+- Vanilla JavaScript (no frameworks)
